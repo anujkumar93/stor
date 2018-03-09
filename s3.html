@@ -1,0 +1,620 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>S3 &mdash; stor 2.1.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="stor 2.1.1 documentation" href="index.html"/>
+        <link rel="next" title="Posix" href="posix.html"/>
+        <link rel="prev" title="Swift" href="swift.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="toc.html" class="icon icon-home"> stor
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.1.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">stor Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main_interface.html">Main Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="swift.html">Swift</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">S3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="posix.html">Posix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="windows.html">Windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exceptions.html">Stor Python Exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extensions.html">SwiftStack Extension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="roadmap.html">Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="release_notes.html">Release Notes</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="toc.html">stor</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="toc.html">Docs</a> &raquo;</li>
+        
+      <li>S3</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/s3.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="s3">
+<span id="id1"></span><h1>S3<a class="headerlink" href="#s3" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-stor.s3"></span><p>An experimental implementation of S3 in stor</p>
+<dl class="class">
+<dt id="stor.s3.S3DownloadLogger">
+<em class="property">class </em><code class="descclassname">stor.s3.</code><code class="descname">S3DownloadLogger</code><span class="sig-paren">(</span><em>total_download_objects</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stor/s3.html#S3DownloadLogger"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#stor.s3.S3DownloadLogger" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="stor.s3.S3DownloadLogger.update_progress">
+<code class="descname">update_progress</code><span class="sig-paren">(</span><em>result</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stor/s3.html#S3DownloadLogger.update_progress"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#stor.s3.S3DownloadLogger.update_progress" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tracks number of bytes downloaded.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="stor.s3.S3Path">
+<em class="property">class </em><code class="descclassname">stor.s3.</code><code class="descname">S3Path</code><span class="sig-paren">(</span><em>pth</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stor/s3.html#S3Path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#stor.s3.S3Path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides the ability to manipulate and access S3 resources
+with a similar interface to the path library.</p>
+<p>Right now, the client defaults to Amazon S3 endpoints, but in the
+near-future, users should be able to custom configure the S3 client.</p>
+<p>Note that any S3 object whose name ends with a <code class="docutils literal notranslate"><span class="pre">/</span></code> is considered to be an empty directory
+marker.
+These objects will not be downloaded and instead an empty directory will be created.
+This follows Amazon’s convention as described in the
+<a class="reference external" href="http://docs.aws.amazon.com/AmazonS3/latest/UG/FolderOperations.html">S3 User Guide</a>.</p>
+<dl class="attribute">
+<dt id="stor.s3.S3Path.bucket">
+<code class="descname">bucket</code><a class="headerlink" href="#stor.s3.S3Path.bucket" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the bucket name from the path or None</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="stor.s3.S3Path.download">
+<code class="descname">download</code><span class="sig-paren">(</span><em>dest</em>, <em>condition=None</em>, <em>use_manifest=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stor/s3.html#S3Path.download"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#stor.s3.S3Path.download" title="Permalink to this definition">¶</a></dt>
+<dd><p>Downloads a directory from S3 to a destination directory.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>dest</strong> (<em>str</em>) – The destination path to download file to. If downloading to a directory,
+there must be a trailing slash. The directory will be created if it doesn’t exist.</li>
+<li><strong>condition</strong> (<em>function</em><em>(</em><em>results</em><em>) </em><em>-&gt; bool</em>) – The method will only return
+when the results of download matches the condition.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A list of the downloaded objects.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">List[<a class="reference internal" href="#stor.s3.S3Path" title="stor.s3.S3Path">S3Path</a>]</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Notes:
+- The destination directory will be created automatically if it doesn’t exist.
+- This method downloads to paths relative to the current directory.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="stor.s3.S3Path.download_object">
+<code class="descname">download_object</code><span class="sig-paren">(</span><em>dest</em>, <em>config=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stor/s3.html#S3Path.download_object"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#stor.s3.S3Path.download_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Downloads a file from S3 to a destination file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>dest</strong> (<em>str</em>) – The destination path to download file to.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li>The destination directory will be created automatically if it doesn’t exist.</li>
+<li>This method downloads to paths relative to the current
+directory.</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="stor.s3.S3Path.exists">
+<code class="descname">exists</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/stor/s3.html#S3Path.exists"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#stor.s3.S3Path.exists" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks existence of the path.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if the path exists, False otherwise.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RemoteError</span></code> – A non-404 error occurred.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="stor.s3.S3Path.getsize">
+<code class="descname">getsize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/stor/s3.html#S3Path.getsize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#stor.s3.S3Path.getsize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the content length of an object in S3.</p>
+<p>Directories and buckets have no length and will return 0.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="stor.s3.S3Path.isdir">
+<code class="descname">isdir</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/stor/s3.html#S3Path.isdir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#stor.s3.S3Path.isdir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Any S3 object whose name ends with a <code class="docutils literal notranslate"><span class="pre">/</span></code> is considered to be an empty directory marker.
+These objects will not be downloaded and instead an empty directory will be created.
+This follows Amazon’s convention as described in the
+<a class="reference external" href="http://docs.aws.amazon.com/AmazonS3/latest/UG/FolderOperations.html">S3 User Guide</a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="stor.s3.S3Path.isfile">
+<code class="descname">isfile</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/stor/s3.html#S3Path.isfile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#stor.s3.S3Path.isfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>See: <a class="reference external" href="http://python.readthedocs.io/en/v2.7.2/library/os.path.html#os.path.isfile" title="(in Python v2.7)"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.path.isfile()</span></code></a></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="stor.s3.S3Path.list">
+<code class="descname">list</code><span class="sig-paren">(</span><em>starts_with=None</em>, <em>limit=None</em>, <em>condition=None</em>, <em>use_manifest=False</em>, <em>list_as_dir=False</em>, <em>ignore_dir_markers=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stor/s3.html#S3Path.list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#stor.s3.S3Path.list" title="Permalink to this definition">¶</a></dt>
+<dd><p>List contents using the resource of the path as a prefix.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>starts_with</strong> (<em>str</em>) – Allows for an additional search path to be
+appended to the current swift path. The current path will be
+treated as a directory.</li>
+<li><strong>limit</strong> (<em>int</em>) – Limit the amount of results returned.</li>
+<li><strong>condition</strong> (<em>function</em><em>(</em><em>results</em><em>) </em><em>-&gt; bool</em>) – The method will only return
+when the results matches the condition.</li>
+<li><strong>use_manifest</strong> (<em>bool</em>) – Perform the list and use the data manfest file to validate
+the list.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Every path in the listing</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">List[<a class="reference internal" href="#stor.s3.S3Path" title="stor.s3.S3Path">S3Path</a>]</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">RemoteError</span></code> – An s3 client error occurred.</li>
+<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">ConditionNotMetError</span></code> – Results were returned, but they did not meet the condition.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="stor.s3.S3Path.listdir">
+<code class="descname">listdir</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/stor/s3.html#S3Path.listdir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#stor.s3.S3Path.listdir" title="Permalink to this definition">¶</a></dt>
+<dd><p>List the path as a dir, returning top-level directories and files.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="stor.s3.S3Path.open">
+<code class="descname">open</code><span class="sig-paren">(</span><em>mode='r'</em>, <em>encoding=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stor/s3.html#S3Path.open"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#stor.s3.S3Path.open" title="Permalink to this definition">¶</a></dt>
+<dd><p>Opens a S3File that can be read or written to.</p>
+<p>For examples of reading and writing opened objects, view
+S3File.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>mode</strong> (<em>str</em>) – The mode of object IO. Currently supports reading
+(“r” or “rb”) and writing (“w”, “wb”)</li>
+<li><strong>encoding</strong> (<em>str</em>) – text encoding to use. Defaults to
+<code class="docutils literal notranslate"><span class="pre">locale.getpreferredencoding(False)</span></code> (Python 3 only).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The s3 object.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">S3File</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RemoteError</span></code> – A s3 client error occurred.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="stor.s3.S3Path.read_object">
+<code class="descname">read_object</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/stor/s3.html#S3Path.read_object"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#stor.s3.S3Path.read_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read an individual object from OBS.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the raw bytes from the object on OBS.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bytes</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="stor.s3.S3Path.remove">
+<code class="descname">remove</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/stor/s3.html#S3Path.remove"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#stor.s3.S3Path.remove" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes a single object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code> – The path is invalid.</li>
+<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">RemoteError</span></code> – An s3 client error occurred.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="stor.s3.S3Path.restore">
+<code class="descname">restore</code><span class="sig-paren">(</span><em>tier='Bulk'</em>, <em>days=10</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stor/s3.html#S3Path.restore"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#stor.s3.S3Path.restore" title="Permalink to this definition">¶</a></dt>
+<dd><p>Issue a restore command for a single object from glacier.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>tier</strong> (<em>str</em><em>, </em><em>default 'Bulk'</em>) – restore speed (see Glacier docs for details)</li>
+<li><strong>days</strong> (<em>int</em><em>, </em><em>default 10</em>) – number of days to keep data in S3 post-restore.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Calling <code class="docutils literal notranslate"><span class="pre">restore()</span></code> on a directory will not work correctly. Only use this for single
+objects! (you can always do <code class="docutils literal notranslate"><span class="pre">[s.restore()</span> <span class="pre">for</span> <span class="pre">s</span> <span class="pre">in</span> <span class="pre">stor.list(&lt;directory&gt;)]</span></code>)</p>
+</div>
+<p>Ignores RestoreAlreadyInProgressError and AlreadyRestoredError (note that you can’t force
+S3 to do a faster restore once you’ve chosen a tier)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="stor.s3.S3Path.rmtree">
+<code class="descname">rmtree</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/stor/s3.html#S3Path.rmtree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#stor.s3.S3Path.rmtree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes a resource and all of its contents. The path should point to a directory.</p>
+<p>If the specified resource is an object, nothing will happen.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="stor.s3.S3Path.stat">
+<code class="descname">stat</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/stor/s3.html#S3Path.stat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#stor.s3.S3Path.stat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs a stat on the path.</p>
+<p><code class="docutils literal notranslate"><span class="pre">stat</span></code> only works on paths that are objects.
+Using <code class="docutils literal notranslate"><span class="pre">stat</span></code> on a directory of objects will produce a <a class="reference internal" href="exceptions.html#stor.exceptions.NotFoundError" title="stor.exceptions.NotFoundError"><code class="xref any py py-exc docutils literal notranslate"><span class="pre">NotFoundError</span></code></a>.</p>
+<p>An example return dictionary is the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s1">&#39;DeleteMarker&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="o">|</span><span class="kc">False</span><span class="p">,</span>
+    <span class="s1">&#39;AcceptRanges&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Expiration&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Restore&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;LastModified&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="s1">&#39;ContentLength&#39;</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
+    <span class="s1">&#39;ETag&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;MissingMeta&#39;</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
+    <span class="s1">&#39;VersionId&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CacheControl&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ContentDisposition&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ContentEncoding&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ContentLanguage&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ContentType&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Expires&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="s1">&#39;WebsiteRedirectLocation&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ServerSideEncryption&#39;</span><span class="p">:</span> <span class="s1">&#39;AES256&#39;</span><span class="o">|</span><span class="s1">&#39;aws:kms&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Metadata&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;string&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;SSECustomerAlgorithm&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;SSECustomerKeyMD5&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;SSEKMSKeyId&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;StorageClass&#39;</span><span class="p">:</span> <span class="s1">&#39;STANDARD&#39;</span><span class="o">|</span><span class="s1">&#39;REDUCED_REDUNDANCY&#39;</span><span class="o">|</span><span class="s1">&#39;STANDARD_IA&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;RequestCharged&#39;</span><span class="p">:</span> <span class="s1">&#39;requester&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ReplicationStatus&#39;</span><span class="p">:</span> <span class="s1">&#39;COMPLETE&#39;</span><span class="o">|</span><span class="s1">&#39;PENDING&#39;</span><span class="o">|</span><span class="s1">&#39;FAILED&#39;</span><span class="o">|</span><span class="s1">&#39;REPLICA&#39;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="stor.s3.S3Path.to_url">
+<code class="descname">to_url</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/stor/s3.html#S3Path.to_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#stor.s3.S3Path.to_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns HTTP url for object (virtual host-style)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="stor.s3.S3Path.upload">
+<code class="descname">upload</code><span class="sig-paren">(</span><em>source</em>, <em>condition=None</em>, <em>use_manifest=False</em>, <em>headers=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stor/s3.html#S3Path.upload"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#stor.s3.S3Path.upload" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uploads a list of files and directories to s3.</p>
+<p>Note that the S3Path is treated as a directory.</p>
+<p>Note that for user-provided OBSUploadObjects, an empty directory’s destination
+must have a trailing slash.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>source</strong> (<em>List</em><em>[</em><em>str|OBSUploadObject</em><em>]</em>) – A list of source files, directories, and
+OBSUploadObjects to upload to S3.</li>
+<li><strong>condition</strong> (<em>function</em><em>(</em><em>results</em><em>) </em><em>-&gt; bool</em>) – The method will only return
+when the results of upload matches the condition.</li>
+<li><strong>use_manifest</strong> (<em>bool</em>) – Generate a data manifest and validate the upload results
+are in the manifest.</li>
+<li><strong>headers</strong> (<a class="reference external" href="http://python.readthedocs.io/en/v2.7.2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) – A dictionary of object headers to apply to the object.
+Headers will not be applied to OBSUploadObjects and any headers
+specified by an OBSUploadObject will override these headers.
+Headers should be specified as key-value pairs,
+e.g. {‘ContentLanguage’: ‘en’}</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A list of the uploaded files as S3Paths.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">List[<a class="reference internal" href="#stor.s3.S3Path" title="stor.s3.S3Path">S3Path</a>]</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Notes:</p>
+<ul class="simple">
+<li>This method uploads to paths relative to the current
+directory.</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="stor.s3.S3Path.write_object">
+<code class="descname">write_object</code><span class="sig-paren">(</span><em>content</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stor/s3.html#S3Path.write_object"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#stor.s3.S3Path.write_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes an individual object.</p>
+<p>Note that this method writes the provided content to a temporary
+file before uploading.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>content</strong> (<em>bytes</em>) – raw bytes to write to OBS</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="stor.s3.S3UploadLogger">
+<em class="property">class </em><code class="descclassname">stor.s3.</code><code class="descname">S3UploadLogger</code><span class="sig-paren">(</span><em>total_upload_objects</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stor/s3.html#S3UploadLogger"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#stor.s3.S3UploadLogger" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="stor.s3.S3UploadLogger.update_progress">
+<code class="descname">update_progress</code><span class="sig-paren">(</span><em>result</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/stor/s3.html#S3UploadLogger.update_progress"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#stor.s3.S3UploadLogger.update_progress" title="Permalink to this definition">¶</a></dt>
+<dd><p>Keep track of total uploaded bytes by referencing the object sizes</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="posix.html" class="btn btn-neutral float-right" title="Posix" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="swift.html" class="btn btn-neutral" title="Swift" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Counsyl Inc.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'2.1.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
