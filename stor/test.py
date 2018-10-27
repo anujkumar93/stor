@@ -1,8 +1,8 @@
 import inspect
 import mock
-import unittest
 import os
 import sys
+import unittest
 import uuid
 
 import dxpy
@@ -10,9 +10,9 @@ import vcr
 
 from stor import Path
 from stor import s3
+from stor import settings
 from stor.s3 import S3Path
 from stor.swift import SwiftPath
-from stor import settings
 
 
 class SwiftTestMixin(object):
@@ -198,6 +198,7 @@ class DXTestMixin(object):
     which records all http interactions for playback.
     """
     vcr_enabled = True  # switch this to False to deactivate vcr recording
+    delete_on_exception = True  # switch to False to persist cassettes on exception
 
     def setUp(self):  # pragma: no cover
         """Sets us vcr cassettes if enabled, and starts patcher for time.sleep.
@@ -210,6 +211,7 @@ class DXTestMixin(object):
         super(DXTestMixin, self).setUp()
         self.cassette = None
         if self.vcr_enabled:
+            self.addCleanup(self.cleanup_cassettes)
             kwargs = self._get_vcr_kwargs()
             myvcr = self._get_vcr(**kwargs)
             cm = myvcr.use_cassette(self._get_cassette_name())
@@ -219,6 +221,14 @@ class DXTestMixin(object):
             patcher = mock.patch('time.sleep')
             self.addCleanup(patcher.stop)
             patcher.start()
+
+    def cleanup_cassettes(self):
+        if self.delete_on_exception:
+            if any(sys.exc_info()):
+                vcr_path = Path(self._get_cassette_library_dir()
+                                ).joinpath(self._get_cassette_name())
+                if vcr_path.isfile():
+                    vcr_path.remove()
 
     def _get_vcr_kwargs(self, **kwargs):
         kwargs.update({'filter_headers': ['authorization']})
