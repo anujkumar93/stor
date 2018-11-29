@@ -564,25 +564,6 @@ class OBSFile(object):
                 self.flush()
             self._buffer.close()
         self.closed = True
-        # we want to wait_on_close on DXPath only if no error was thrown while writing the file
-        if not any(sys.exc_info()):  # pragma: no cover
-            self._wait_on_close()
-
-    def _wait_on_close(self):
-        from stor_dx.dx import DXPath
-        if isinstance(self._path, DXPath):
-            wait_on_close = stor.settings.get()['dx']['wait_on_close']
-            if wait_on_close:
-                from stor_dx import dx
-                with dx._wrap_dx_calls():
-                    f = dxpy.DXFile(dxid=self._path.canonical_resource,
-                                    project=self._path.canonical_project)
-                    try:
-                        f.wait_on_close(wait_on_close)
-                    # ignore timeout because we want client code to deal with it
-                    except dxpy.DXError as e:  # pragma: no cover
-                        if 'timeout' not in str(e):
-                            raise
 
     def flush(self):
         """Flushes the write buffer to the OBS path (if it exists)"""
