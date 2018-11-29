@@ -10,7 +10,7 @@ import mock
 
 from stor import exceptions
 from stor import Path
-from stor import utils
+from stor_dx import utils
 from stor.tests.shared_obs import SharedOBSFileCases
 from stor_dx.dx import DXPath
 from stor_dx.test import DXTestCase
