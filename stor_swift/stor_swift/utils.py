@@ -15,7 +15,7 @@ def is_swift_path(p):
     Returns:
         bool: True if p is a Swift path, False otherwise.
     """
-    from stor_swift.swift import SwiftPath
+    from stor_swift import SwiftPath
     return p.startswith(SwiftPath.drive)
 
 
@@ -54,8 +54,8 @@ def is_writeable(path, swift_retry_options=None):
     from stor import join
     from stor import Path
     from stor import remove
+    from stor_swift import SwiftPath
     from stor_swift.swift import ConflictError
-    from stor_swift.swift import SwiftPath
     from stor_swift.swift import UnauthorizedError
     from stor_swift.swift import UnavailableError
     import stor
