@@ -1,6 +1,6 @@
 # Makefile utilities for running tests and publishing the package
 
-PACKAGE_NAMES:=stor/ stor_dx/ stor_swift/ stor_s3/
+PACKAGE_NAMES:=stor_dx/ stor_swift/ stor_s3/ stor/
 TEST_OUTPUT?=nosetests.xml
 PIP_INDEX_URL=https://pypi.python.org/simple/
 PYTHON?=$(shell which python)
@@ -27,7 +27,7 @@ $(VENV_ACTIVATE): stor*/requirements*.txt
 	test -f $@ || virtualenv --python=$(PYTHON) $(VENV_DIR)
 	$(WITH_VENV) echo "Within venv, running $$(python --version)"
 	$(WITH_VENV) pip install -r stor/requirements-setup.txt --index-url=${PIP_INDEX_URL}
-	$(WITH_VENV) ./run_all.sh 'pip install -e . --index-url=${PIP_INDEX_URL}' $(PACKAGE_NAMES)
+	$(WITH_VENV) ./run_all.sh 'pip install -e . --index-url=${PIP_INDEX_URL}' stor/
 	$(WITH_VENV) pip install -r stor/requirements-dev.txt  --index-url=${PIP_INDEX_URL}
 	$(WITH_VENV) pip install -r stor/requirements-docs.txt --index-url=${PIP_INDEX_URL}
 	touch $@
@@ -129,7 +129,7 @@ sdist: dist
 	@echo "runs dist"
 
 .PHONY: version
-version:
+version: venv
 	@echo ${VERSION}
 
 .PHONY: fullname
