@@ -1,6 +1,7 @@
 # Makefile utilities for running tests and publishing the package
 
-PACKAGE_NAMES:=stor_dx/ stor_swift/ stor_s3/ stor/
+PLUGIN_PACKAGES:=stor_dx/ stor_swift/ stor_s3/
+PACKAGE_NAMES:=$(PLUGIN_PACKAGES) stor/
 TEST_OUTPUT?=nosetests.xml
 PIP_INDEX_URL=https://pypi.python.org/simple/
 PYTHON?=$(shell which python)
@@ -26,10 +27,10 @@ venv: $(VENV_ACTIVATE)
 $(VENV_ACTIVATE): stor*/requirements*.txt
 	test -f $@ || virtualenv --python=$(PYTHON) $(VENV_DIR)
 	$(WITH_VENV) echo "Within venv, running $$(python --version)"
-	$(WITH_VENV) pip install -r stor/requirements-setup.txt --index-url=${PIP_INDEX_URL}
+	$(WITH_VENV) pip install -r requirements-setup.txt --index-url=${PIP_INDEX_URL}
 	$(WITH_VENV) ./run_all.sh 'pip install -e . --index-url=${PIP_INDEX_URL}' stor/
-	$(WITH_VENV) pip install -r stor/requirements-dev.txt  --index-url=${PIP_INDEX_URL}
-	$(WITH_VENV) pip install -r stor/requirements-docs.txt --index-url=${PIP_INDEX_URL}
+	$(WITH_VENV) pip install -r requirements-dev.txt  --index-url=${PIP_INDEX_URL}
+	$(WITH_VENV) pip install -r requirements-docs.txt --index-url=${PIP_INDEX_URL}
 	touch $@
 
 develop: venv
@@ -118,7 +119,12 @@ tag: venv
 
 .PHONY: dist
 dist: venv fullname
-	$(WITH_VENV) ./run_all.sh 'python setup.py sdist' $(PACKAGE_NAMES)
+	$(WITH_VENV) \
+	./run_all.sh 'python setup.py sdist' $(PLUGIN_PACKAGES); \
+    for plugin in $(PLUGIN_PACKAGES); do \
+        sed -i '' 's/$(plugin)/$(plugin)==$(VERSION)/g' stor/requirements.txt ; \
+    done; \
+    ./run_all.sh 'python setup.py sdist' stor/ \
 
 .PHONY: publish-docs
 publish-docs:
