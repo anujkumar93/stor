@@ -53,6 +53,7 @@ endif
 clean:
 	./run_all.sh '$(PYTHON) setup.py clean' $(PACKAGE_NAMES)
 	./run_all.sh 'rm -rf *.egg*/' $(PACKAGE_NAMES) .
+	./run_all.sh 'rm -rf .*egg*/' $(PACKAGE_NAMES) .
 	./run_all.sh 'rm -rf dist/' $(PACKAGE_NAMES)
 	./run_all.sh 'rm -rf build/' $(PACKAGE_NAMES)
 	./run_all.sh 'rm -rf __pycache__/' $(PACKAGE_NAMES) .
