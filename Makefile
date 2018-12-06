@@ -123,11 +123,13 @@ tag: venv
 dist: venv fullname
 	# dynamically set the version in each requirements file to be the version of the package being installed
 	$(WITH_VENV) \
+	./run_all.sh 'cp requirements.txt requirements.txt.old' $(PLUGIN_PACKAGES); \
 	for plugin in $(PLUGIN_PACKAGES); do \
 		awk -v p=stor -v v=$(VERSION) '$$0 ~ p {gsub("$$","=="v,$$0)}1' < $$plugin/requirements.txt > $$plugin/requirements.txt.tmp ; \
 		mv $$plugin/requirements.txt.tmp $$plugin/requirements.txt; \
 	done; \
 	./run_all.sh 'python setup.py sdist' $(PLUGIN_PACKAGES); \
+	./run_all.sh 'mv requirements.txt.old requirements.txt' $(PLUGIN_PACKAGES); \
 	cp stor/requirements.txt stor/requirements.txt.old; \
 	for plugin in $(subst /,,$(PLUGIN_PACKAGES)); do \
 		awk -v p=$$plugin -v v=$(VERSION) '$$0 ~ p {gsub("$$","=="v,$$0)}1' < stor/requirements.txt > stor/requirements.txt.tmp ; \
