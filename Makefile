@@ -121,10 +121,13 @@ tag: venv
 dist: venv fullname
 	$(WITH_VENV) \
 	./run_all.sh 'python setup.py sdist' $(PLUGIN_PACKAGES); \
-    for plugin in $(PLUGIN_PACKAGES); do \
-        sed -i '' 's/$(plugin)/$(plugin)==$(VERSION)/g' stor/requirements.txt ; \
-    done; \
-    ./run_all.sh 'python setup.py sdist' stor/ \
+	cp stor/requirements.txt stor/requirements.txt.old; \
+	for plugin in $(subst /,,$(PLUGIN_PACKAGES)); do \
+		awk -v p=$$plugin -v v=$(VERSION) '$$0 ~ p {gsub("$$","=="v,$$0)}1' < stor/requirements.txt > stor/requirements.txt.tmp ; \
+		mv stor/requirements.txt.tmp stor/requirements.txt; \
+	done; \
+	./run_all.sh 'python setup.py sdist' stor/ ; \
+	mv stor/requirements.txt.old stor/requirements.txt; \
 
 .PHONY: publish-docs
 publish-docs:
