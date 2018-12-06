@@ -28,7 +28,8 @@ $(VENV_ACTIVATE): stor*/requirements*.txt
 	test -f $@ || virtualenv --python=$(PYTHON) $(VENV_DIR)
 	$(WITH_VENV) echo "Within venv, running $$(python --version)"
 	$(WITH_VENV) pip install -r requirements-setup.txt --index-url=${PIP_INDEX_URL}
-	$(WITH_VENV) ./run_all.sh 'pip install -e . --index-url=${PIP_INDEX_URL}' stor/
+	$(WITH_VENV) ./run_all.sh 'pip install -r requirements-test.txt --index-url=${PIP_INDEX_URL}' $(PACKAGE_NAMES)
+	$(WITH_VENV) ./run_all.sh 'pip install --no-deps -e . --index-url=${PIP_INDEX_URL}' $(PACKAGE_NAMES)
 	$(WITH_VENV) pip install -r requirements-dev.txt  --index-url=${PIP_INDEX_URL}
 	$(WITH_VENV) pip install -r requirements-docs.txt --index-url=${PIP_INDEX_URL}
 	touch $@
@@ -120,7 +121,12 @@ tag: venv
 
 .PHONY: dist
 dist: venv fullname
+	# dynamically set the version in each requirements file to be the version of the package being installed
 	$(WITH_VENV) \
+	for plugin in $(PLUGIN_PACKAGES); do \
+		awk -v p=stor -v v=$(VERSION) '$$0 ~ p {gsub("$$","=="v,$$0)}1' < $$plugin/requirements.txt > $$plugin/requirements.txt.tmp ; \
+		mv $$plugin/requirements.txt.tmp $$plugin/requirements.txt; \
+	done; \
 	./run_all.sh 'python setup.py sdist' $(PLUGIN_PACKAGES); \
 	cp stor/requirements.txt stor/requirements.txt.old; \
 	for plugin in $(subst /,,$(PLUGIN_PACKAGES)); do \

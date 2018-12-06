@@ -3,6 +3,3 @@
 
 tox==2.1.1
 xunitmerge==1.0.4
--e stor_dx
--e stor_s3
--e stor_swift
