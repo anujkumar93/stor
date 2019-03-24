@@ -54,3 +54,9 @@ class TestBasics(unittest.TestCase):
         # .ext
         self.assertEqual(f.ext, '.csv')
         self.assertEqual(f.parent.ext, '')
+
+    def test_splitdrive(self):
+        f = S3Path('s3://')
+        assert f.splitdrive() == (S3Path('s3://'), '')
+        f = S3Path('s3://bucket/prefix/whatever.csv')
+        assert f.splitdrive() == (S3Path('s3://'), 'bucket/prefix/whatever.csv')

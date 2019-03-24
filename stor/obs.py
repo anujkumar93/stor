@@ -123,6 +123,10 @@ class OBSPath(Path):
 
         return self.parts_class(joined_resource) if joined_resource else None
 
+    def splitdrive(self):
+        """Split drive for obs paths from the rest"""
+        return self.path_class(self.drive), self[len(self.drive):]
+
     def normpath(self):
         """Normalize path following linux conventions (keeps drive prefix)"""
         normed = posixpath.normpath('/' + str(self)[len(self.drive):])[1:]

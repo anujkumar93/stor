@@ -54,3 +54,9 @@ class TestBasics(unittest.TestCase):
         # .ext
         self.assertEqual(f.ext, '.csv')
         self.assertEqual(f.parent.ext, '')
+
+    def test_splitdrive(self):
+        f = SwiftPath("swift://")
+        assert f.splitdrive() == (SwiftPath('swift://'), '')
+        f = SwiftPath("swift://foo")
+        assert f.splitdrive() == (SwiftPath('swift://'), 'foo')

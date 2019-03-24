@@ -223,3 +223,9 @@ class TestBasics(unittest.TestCase):
         assert f.splitpath() == (DXCanonicalPath("dx://project-123456789012345678901234:"), '')
         f = DXPath('dx://project-123456789012345678901234')
         assert f.splitpath() == (DXCanonicalPath("dx://project-123456789012345678901234:"), '')
+
+    def test_splitdrive(self):
+        f = DXPath('dx://')
+        assert f.splitdrive() == (DXPath('dx://'), '')
+        f = DXPath('dx://project:prefix/dir/file')
+        assert f.splitdrive() == (DXPath('dx://'), 'project:prefix/dir/file')
